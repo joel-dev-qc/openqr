@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="OpenQR.API/OpenQR.API.csproj" />
+  <Project Path="OpenQR.Application/OpenQR.Application.csproj" />
+  <Project Path="OpenQR.Domain/OpenQR.Domain.csproj" />
+  <Project Path="OpenQR.Infrastructure/OpenQR.Infrastructure.csproj" />
+  <Project Path="OpenQR.Web/OpenQR.Web.csproj" />
+</Solution>
