@@ -70,7 +70,6 @@ OpenQR.Web/
 - Expression-bodied members pour les propriétés simples et one-liners
 
 ### Async/Await
-- `ConfigureAwait(false)` obligatoire sur **tous** les awaits dans les couches non-UI (Domain, Application, Infrastructure, API)
 - Suffix `Async` obligatoire sur toutes les méthodes asynchrones
 - Jamais de `.Result` ou `.Wait()` — toujours `await`
 
@@ -178,3 +177,14 @@ Toutes les versions sont gérées centralement dans `Directory.Packages.props`.
 5. `martinothamar/Mediator` uniquement — jamais `MediatR`
 6. MongoDB.Driver v3.x uniquement
 7. .NET 10 uniquement
+
+---
+
+## Skills
+
+Les skills suivants définissent des bonnes pratiques spécialisées à appliquer dans ce projet.
+
+- [C# Async Programming Best Practices](.github/skills/csharp-async/SKILL.md)
+- [C# Documentation Best Practices](.github/skills/csharp-docs/SKILL.md)
+- [XUnit Best Practices](.github/skills/csharp-xunit/SKILL.md)
+- [.NET/C# Best Practices](.github/skills/dotnet-best-practices/SKILL.md)
