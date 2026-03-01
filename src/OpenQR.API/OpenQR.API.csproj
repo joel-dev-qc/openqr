@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenQR.Application\OpenQR.Application.csproj" />
-    <ProjectReference Include="..\OpenQR.Infrastructure\OpenQR.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\OpenQR.Application\OpenQR.Application.csproj" />
+    <ProjectReference Include="..\..\OpenQR.Infrastructure\OpenQR.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

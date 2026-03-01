@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenQR.Application\OpenQR.Application.csproj" />
+    <ProjectReference Include="..\..\OpenQR.Application\OpenQR.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
