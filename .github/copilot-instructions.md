@@ -205,3 +205,4 @@ Les agents suivants sont des modes spécialisés pour des tâches complexes et a
 - [TDD Refactor](.github/agents/tdd-refactor.agent.md) — Refactoring post-TDD, qualité, sécurité, SOLID, green tests
 - [Create PRD](.github/agents/prd.agent.md) — Génération de PRDs complets avec user stories, critères d'acceptance et création de GitHub Issues
 - [Plan Mode](.github/agents/plan.agent.md) — Planification stratégique et analyse d'architecture avant implémentation
+- [Senior Cloud Architect](.github/agents/arch.agent.md) — Diagrammes Mermaid, architecture cloud, NFR, documentation d'architecture sans génération de code
