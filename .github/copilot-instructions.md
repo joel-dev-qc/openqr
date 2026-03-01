@@ -188,3 +188,6 @@ Les skills suivants définissent des bonnes pratiques spécialisées à applique
 - [C# Documentation Best Practices](.github/skills/csharp-docs/SKILL.md)
 - [XUnit Best Practices](.github/skills/csharp-xunit/SKILL.md)
 - [.NET/C# Best Practices](.github/skills/dotnet-best-practices/SKILL.md)
+- [Clean Code Principles](.github/skills/clean-code/SKILL.md)
+- [SOLID Principles — OpenQR](.github/skills/dotnet-solid/SKILL.md)
+- [Make Skill Template](.github/skills/make-skill-template/SKILL.md)

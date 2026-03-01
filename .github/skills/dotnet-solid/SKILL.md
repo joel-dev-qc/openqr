@@ -351,13 +351,130 @@ OpenQR.Infrastructure    OpenQR.API / OpenQR.Web
 | **`IAsyncEnumerable`** | For streaming MongoDB results instead of `List<T>` |
 | **File-scoped namespaces** | `namespace OpenQR.Application.Features.QrCodes;` |
 | **`_camelCase` fields** | Private fields use `_camelCase` prefix |
-| **SonarAnalyzer** | All SonarAnalyzer.CSharp warnings must be resolved before merge |
+| **`TreatWarningsAsErrors`** | **All analyzer warnings are build errors** — SOLID-related analyzers (CA1062, CA2007, SA*) block the build |
+
+---
+
+## 🌐 Web Layer (OpenQR.Web) — Blazor / MudBlazor SOLID Rules
+
+> Blazor components are classes too — they must obey SOLID.
+
+### SRP in Blazor Components
+- A `.razor` component should do **one thing**: render UI and delegate logic
+- Business logic, HTTP calls, and state management belong in **injected services**, not in `@code` blocks
+- Extract complex state into a dedicated `ViewModel` or `StateContainer` class
+
+```razor
+@* ❌ Violation — business logic + HTTP + UI in one component *@
+@code {
+    private List<QrCodeDto> _qrCodes = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.GetAsync("/api/v1/qrcodes");
+        var json = await response.Content.ReadAsStringAsync();
+        _qrCodes = JsonSerializer.Deserialize<List<QrCodeDto>>(json)!;
+        // + filtering, sorting, paging logic...
+    }
+}
+
+@* ✅ Compliant — component delegates to an injected service *@
+@inject IQrCodeApiClient QrCodeClient
+@code {
+    private IReadOnlyList<QrCodeDto> _qrCodes = [];
+
+    protected override async Task OnInitializedAsync()
+        => _qrCodes = await QrCodeClient.GetAllAsync();
+}
+```
+
+### DIP in Blazor Components
+- Always inject **interfaces**, never concrete HTTP clients or service implementations directly
+- Define service interfaces in `OpenQR.Web/Core/Interfaces/`
+- Implement them in `OpenQR.Web/Infrastructure/`
+
+### ISP in Blazor Components
+- Don't inject a service with 15 methods into a component that only needs 1
+- Split service interfaces by feature area: `IQrCodeApiClient`, `IUserApiClient`
+
+---
+
+## 🧪 Tests as SOLID Violation Indicators
+
+> If code is hard to test, it almost certainly violates SOLID. Use test friction as a diagnostic tool.
+
+| Test Friction | Likely SOLID Violation |
+|---|---|
+| Must instantiate many real dependencies to test one class | **DIP** — missing abstractions; inject interfaces instead |
+| Test setup exceeds 20 lines for a single unit | **SRP** — class has too many responsibilities |
+| Changing one feature breaks unrelated tests | **SRP** / **OCP** — responsibilities are not isolated |
+| Must use `new ConcreteClass()` in tests (no interface) | **DIP** — depends on concretion |
+| Adding a new case requires modifying an existing test | **OCP** — behavior is not extensible |
+| Subclass test fails when run against base class contract | **LSP** — subtype breaks the contract |
+| Test imports an interface but mocks only 1 of 10 methods | **ISP** — interface is too fat |
+
+```csharp
+// ✅ Well-designed handler — trivial to test because of DIP + SRP
+public sealed class CreateQrCodeHandlerTests
+{
+    [Fact]
+    public async Task Handle_ValidCommand_ReturnsNewId()
+    {
+        // Arrange — only one mock needed = SRP + DIP respected
+        var repository = Substitute.For<IQrCodeWriteRepository>();
+        var handler = new CreateQrCodeHandler(repository);
+        var command = new CreateQrCodeCommand("https://openqr.io", UserId: "user-1");
+
+        // Act
+        var id = await handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        await repository.Received(1).AddAsync(Arg.Any<QrCode>(), Arg.Any<CancellationToken>());
+        id.Should().NotBeEmpty();
+    }
+}
+```
+
+---
+
+## 🧱 Composition over Inheritance
+
+> Prefer composing behaviors from small focused objects over building deep class hierarchies.
+
+- Inheritance creates tight coupling between base and derived classes — avoid it except for genuine "is-a" relationships
+- Use **interfaces + constructor injection** to compose behaviors
+- Use **extension methods** to add capabilities without inheritance
+- Use **decorators** to add cross-cutting concerns (logging, caching, validation) without modifying classes
+
+```csharp
+// ❌ Inheritance-based — fragile, hard to test, violates OCP
+public class LoggingQrCodeRepository : MongoQrCodeRepository
+{
+    protected override async Task AddAsync(QrCode qr, CancellationToken ct)
+    {
+        Console.WriteLine("Adding QR code...");
+        await base.AddAsync(qr, ct);
+    }
+}
+
+// ✅ Decorator pattern — composable, testable, respects OCP + DIP
+public sealed class LoggingQrCodeRepositoryDecorator(IQrCodeWriteRepository inner, ILogger<LoggingQrCodeRepositoryDecorator> logger)
+    : IQrCodeWriteRepository
+{
+    public async Task AddAsync(QrCode qr, CancellationToken ct)
+    {
+        logger.LogInformation("Adding QR code {Id}", qr.Id);
+        await inner.AddAsync(qr, ct).ConfigureAwait(false);
+    }
+}
+// Register in DI: Decorate<IQrCodeWriteRepository, LoggingQrCodeRepositoryDecorator>()
+```
 
 ---
 
 ## 🔗 Related Skills
 
-- `dotnet-best-practices` — general .NET code quality and async patterns
-- `dotnet-design-pattern-review` — GoF pattern review (Command, Factory, Repository)
-- `refactor` — general refactoring guidance
-- `conventional-commit` — commit message after SOLID refactoring
+- [`dotnet-best-practices`](.github/skills/dotnet-best-practices/SKILL.md) — general .NET code quality and async patterns
+- [`clean-code`](.github/skills/clean-code/SKILL.md) — Clean Code principles, code smells, and enterprise patterns
+- [`csharp-xunit`](.github/skills/csharp-xunit/SKILL.md) — XUnit best practices for testing SOLID-compliant code
+- [`csharp-async`](.github/skills/csharp-async/SKILL.md) — async/await patterns applied in Infrastructure and Application layers
