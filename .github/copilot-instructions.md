@@ -203,3 +203,5 @@ Les agents suivants sont des modes spécialisés pour des tâches complexes et a
 - [SE: Architect](.github/agents/se-system-architecture-reviewer.agent.md) — Revue d'architecture, Well-Architected Framework, ADRs
 - [SE: Security](.github/agents/se-security-reviewer.agent.md) — Revue de sécurité OWASP Top 10, Zero Trust, JWT, MongoDB
 - [TDD Refactor](.github/agents/tdd-refactor.agent.md) — Refactoring post-TDD, qualité, sécurité, SOLID, green tests
+- [Create PRD](.github/agents/prd.agent.md) — Génération de PRDs complets avec user stories, critères d'acceptance et création de GitHub Issues
+- [Plan Mode](.github/agents/plan.agent.md) — Planification stratégique et analyse d'architecture avant implémentation

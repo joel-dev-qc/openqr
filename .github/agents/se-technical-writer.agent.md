@@ -1,7 +1,7 @@
 ---
 name: 'SE: Tech Writer'
 description: 'Technical writing specialist for creating developer documentation, technical blogs, tutorials, and educational content'
-model: GPT-5
+model: Claude Sonnet 4.6 (copilot)
 tools: ['codebase', 'edit/editFiles', 'search', 'web/fetch']
 ---
 
