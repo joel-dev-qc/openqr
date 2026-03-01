@@ -191,3 +191,15 @@ Les skills suivants définissent des bonnes pratiques spécialisées à applique
 - [Clean Code Principles](.github/skills/clean-code/SKILL.md)
 - [SOLID Principles — OpenQR](.github/skills/dotnet-solid/SKILL.md)
 - [Make Skill Template](.github/skills/make-skill-template/SKILL.md)
+- [Generate Specs as GitHub Issues](.github/skills/gen-specs-as-issues/SKILL.md)
+
+---
+
+## Agents
+
+Les agents suivants sont des modes spécialisés pour des tâches complexes et autonomes.
+
+- [SE: Technical Writer](.github/agents/se-technical-writer.agent.md) — Rédaction de documentation, blogs techniques, tutoriels, ADRs
+- [SE: Architect](.github/agents/se-system-architecture-reviewer.agent.md) — Revue d'architecture, Well-Architected Framework, ADRs
+- [SE: Security](.github/agents/se-security-reviewer.agent.md) — Revue de sécurité OWASP Top 10, Zero Trust, JWT, MongoDB
+- [TDD Refactor](.github/agents/tdd-refactor.agent.md) — Refactoring post-TDD, qualité, sécurité, SOLID, green tests
