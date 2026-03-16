@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenQR.Application\OpenQR.Application.csproj" />
+    <ProjectReference Include="..\OpenQR.Application\OpenQR.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" />
+    <PackageReference Include="Aspire.MongoDB.Driver" />
   </ItemGroup>
 
 </Project>

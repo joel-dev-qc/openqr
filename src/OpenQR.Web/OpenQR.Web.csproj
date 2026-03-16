@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenQR.ServiceDefaults\OpenQR.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MudBlazor" />
   </ItemGroup>
 

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="13.1.2" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>OpenQR.AppHost</RootNamespace>
+    <UserSecretsId>openqr-apphost</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenQR.API\OpenQR.API.csproj" />
+    <ProjectReference Include="..\OpenQR.Web\OpenQR.Web.csproj" />
+  </ItemGroup>
+
+</Project>

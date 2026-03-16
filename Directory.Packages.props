@@ -3,6 +3,10 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <!-- Aspire -->
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.1.2" />
+    <PackageVersion Include="Aspire.Hosting.MongoDB" Version="13.1.2" />
+    <PackageVersion Include="Aspire.MongoDB.Driver" Version="13.1.2" />
     <!-- Mediator (martinothamar) -->
     <PackageVersion Include="Mediator.SourceGenerator" Version="3.0.1" />
     <PackageVersion Include="Mediator.Abstractions" Version="3.0.1" />
@@ -19,10 +23,9 @@
     <PackageVersion Include="Scalar.AspNetCore" Version="2.12.46" />
     <!-- Health checks -->
     <PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
-    <!-- Serilog -->
-    <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
-    <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
-    <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+    <!-- Service Discovery + Resilience -->
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.4.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.4.0" />
     <!-- OpenTelemetry -->
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.0" />
